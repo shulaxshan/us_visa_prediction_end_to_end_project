@@ -17,3 +17,7 @@ conda activate visa
 
 pip install -r requirements.txt
 ```
+
+## Workflow:
+1. constants
+2. entity
