@@ -16,8 +16,6 @@ class PostgresSQLConnection:
             self.engine = create_engine(self.connection_string)
             print("PostgreSQL connection succesfull")
             logging.info("PostgreSQL connection succesfull")
-            # table_name = 'us_visa'
-            # df1 = pd.read_sql_table(table_name, con=engine)
         except Exception as e:
             raise CustomException(e,sys)
         

@@ -6,13 +6,14 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 from us_visa.configuration.postgrsql_connection import PostgresSQLConnection
+from us_visa.constants import *
 
 
 @dataclass
 class DataIngestionConfig:
-    train_data_path: str=os.path.join('artifacts',"train.csv")
-    test_data_path: str=os.path.join('artifacts',"test.csv")
-    raw_data_path: str=os.path.join('artifacts',"data.csv")
+    train_data_path: str=os.path.join(DATA_INGESTION_DIR_NAME,"train.csv")
+    test_data_path: str=os.path.join(DATA_INGESTION_DIR_NAME,"test.csv")
+    raw_data_path: str=os.path.join(DATA_INGESTION_DIR_NAME,"data.csv")
 
 
 class DataIngestion:
@@ -25,9 +26,7 @@ class DataIngestion:
             postgres_connection = PostgresSQLConnection()
             engine = postgres_connection.get_engine()
 
-            table_name = 'us_visa'
             df = pd.read_sql_table(table_name, con=engine)
-            #df=pd.read_csv('notebook\data\stud.csv')
             logging.info('Read the dataset as dataframe')
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
@@ -35,7 +34,7 @@ class DataIngestion:
             df.to_csv(self.ingestion_config.raw_data_path,index=False,header=True)
 
             logging.info("Train test split initiated")
-            train_set,test_set=train_test_split(df,test_size=0.2,random_state=42)
+            train_set,test_set=train_test_split(df,test_size=DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO,random_state=42)
 
             train_set.to_csv(self.ingestion_config.train_data_path,index=False,header=True)
 
@@ -51,9 +50,9 @@ class DataIngestion:
         except Exception as e:
             raise CustomException(e,sys)
         
-if __name__=="__main__":
-    obj=DataIngestion()
-    obj.initiate_data_ingestion()
+# if __name__=="__main__":
+#     obj=DataIngestion()
+#     obj.initiate_data_ingestion()
 
 
 
