@@ -133,7 +133,9 @@ class DataTransformation:
 
             logging.info("Created train array and test array")
             train_arr = np.c_[input_feature_train_final, np.array(target_feature_train_final)]
+            print("train array:", train_arr.shape)
             test_arr = np.c_[input_feature_test_final, np.array(target_feature_test_final)]
+            
 
             save_object(self.data_transformation_config.preprocessor_obj_file_path, preprocessor)
             save_numpy_array_data(self.data_transformation_config.preprocessor_train_file_path, array=train_arr)

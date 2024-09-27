@@ -53,6 +53,15 @@ DATA_TRANFORMATION_TRAIN_PATH: str = 'artifacts/data_transformation/preprocessor
 DATA_TRANFORMATION_TEST_PATH: str = 'artifacts/data_transformation/preprocessor_test_data.npy'
 
 
+""""
+Saved model and preprocessor file paths
+"""
+MODEL_FILE_PATH = 'artifacts/model_trainer/model.pkl'
+PREPROCESSING_OBJECT_FILE_PATH = 'artifacts/data_transformation/preprocessor.pkl'
+
+
+APP_HOST = "0.0.0.0"
+APP_PORT = 8080
 
 PIPELINE_NAME: str = "usvisa"
 ARTIFACT_DIR: str = "artifact"
